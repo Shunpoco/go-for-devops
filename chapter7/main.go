@@ -17,12 +17,13 @@ var (
 		false,
 		"Use a development endpoint",
 	)
-	help = flag.Bool(
-		"help",
-		false,
-		"Display help text",
-	)
+	help = new(bool)
 )
+
+func init() {
+	flag.BoolVar(help, "help", false, "Display help text")
+	flag.BoolVar(help, "h", false, "Display help text (shorthand)")
+}
 
 func main() {
 	flag.Parse()
