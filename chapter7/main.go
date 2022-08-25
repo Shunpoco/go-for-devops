@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 )
@@ -32,14 +33,13 @@ func main() {
 		return
 	}
 
-	switch {
-	case *useProd && *useDev:
-		log.Println("Error: --prod and --dev cannot both be set")
-		flag.PrintDefaults()
+	authors := flag.Args()
+	if len(authors) == 0 {
+		log.Println("did not pass any authors")
 		os.Exit(1)
-	case !(*useProd || *useDev):
-		log.Println("Error: either --prod or --dev must be set")
-		flag.PrintDefaults()
-		os.Exit(1)
+	}
+
+	for _, author := range authors {
+		fmt.Println(author)
 	}
 }
